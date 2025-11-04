@@ -32,24 +32,28 @@ st.title("🤖 Groq LLM Chatbot")
 st.markdown("Chat with **LLaMA 3.3 (70B)** model via **Groq** in real-time!")
 
 # -------------------------------
-# Clear Chat Button
-# -------------------------------
-if st.button("🧹 Clear Chat"):
-    st.session_state.messages = [SystemMessage(content="You are a helpful assistant.")]
-    st.experimental_rerun()  # refresh the app to clear UI
-
-# -------------------------------
 # Store chat history
 # -------------------------------
 if "messages" not in st.session_state:
     st.session_state.messages = [SystemMessage(content="You are a helpful assistant.")]
 
+# -------------------------------
+# Clear Chat Button (safe)
+# -------------------------------
+if st.button("🧹 Clear Chat"):
+    st.session_state.messages = [SystemMessage(content="You are a helpful assistant.")]
+    st.session_state.cleared = True  # flag to prevent double rendering
+
 # Display previous chat
-for msg in st.session_state.messages[1:]:
-    if isinstance(msg, HumanMessage):
-        st.chat_message("user").markdown(msg.content)
-    elif isinstance(msg, SystemMessage):
-        st.chat_message("assistant").markdown(msg.content)
+if "cleared" in st.session_state:
+    # If chat was cleared, remove the flag and skip displaying old messages
+    del st.session_state.cleared
+else:
+    for msg in st.session_state.messages[1:]:
+        if isinstance(msg, HumanMessage):
+            st.chat_message("user").markdown(msg.content)
+        elif isinstance(msg, SystemMessage):
+            st.chat_message("assistant").markdown(msg.content)
 
 # Chat input
 user_query = st.chat_input("Type your message...")
