@@ -40,7 +40,7 @@ if "messages" not in st.session_state:
 # -------------------------------
 # Clear Chat Button (safe)
 # -------------------------------
-if st.button("🧹 Clear Chat"):
+if st.button("Clear Conversation"):
     st.session_state.messages = [SystemMessage(content="You are a helpful assistant.")]
     st.session_state.cleared = True  # flag to prevent double rendering
 
