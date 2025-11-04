@@ -29,7 +29,6 @@ except Exception as e:
 st.set_page_config(page_title="Groq Chatbot", page_icon="🤖", layout="centered")
 
 st.title("🤖 Groq LLM Chatbot")
-st.markdown("Chat with **LLaMA 3.3 (70B)** model via **Groq** in real-time!")
 
 # -------------------------------
 # Store chat history
