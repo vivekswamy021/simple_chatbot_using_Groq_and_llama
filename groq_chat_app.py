@@ -31,7 +31,16 @@ st.set_page_config(page_title="Groq Chatbot", page_icon="🤖", layout="centered
 st.title("🤖 Groq LLM Chatbot")
 st.markdown("Chat with **LLaMA 3.3 (70B)** model via **Groq** in real-time!")
 
+# -------------------------------
+# Clear Chat Button
+# -------------------------------
+if st.button("🧹 Clear Chat"):
+    st.session_state.messages = [SystemMessage(content="You are a helpful assistant.")]
+    st.experimental_rerun()  # refresh the app to clear UI
+
+# -------------------------------
 # Store chat history
+# -------------------------------
 if "messages" not in st.session_state:
     st.session_state.messages = [SystemMessage(content="You are a helpful assistant.")]
 
