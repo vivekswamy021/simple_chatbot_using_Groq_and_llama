@@ -16,7 +16,7 @@ if not groq_api_key:
 # -------------------------------
 try:
     llm = ChatGroq(
-        model_name="llama-3.3-70b-versatile",
+        model_name="#meta-llama/llama-4-maverick-17b-128e-instruct",           #llama-3.3-70b-versatile
         groq_api_key=groq_api_key
     )
 except Exception as e:
